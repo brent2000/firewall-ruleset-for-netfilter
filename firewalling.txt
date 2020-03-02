@@ -1,0 +1,22 @@
+# iptables -P INPUT DROP
+# iptables -P OUTPUT DROP
+# iptables -P FORWARD DROP
+# iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+# iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
+# iptables -A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT
+# iptables -t mangle -A PREROUTING -p icmp -j DROP
+
+# iptables -A OUTPUT -d DNSServer -p udp -dport 53 -j ACCEPT
+# iptables -A INPUT -s DNSServer -p udp -sport 53 -j ACCEPT
+# iptables -A OUTPUT -p tcp --dport 53 -j DROP
+# iptables -A INPUT -p tcp --dport 53 -j DROP
+# iptables -A OUTPUT -p tcp --sport 21 -m state --state ESTABLISHED -j ACCEPT
+# iptables -A INPUT -p tcp --dport 21 -m state --state NEW,ESTABLISHED -j ACCEPT
+# iptables -A OUTPUT -p tcp --sport 20 -m state --state ESTABLISHED,RELATED -j ACCEPT
+# iptables -A INPUT -p tcp --dport 20 -m state --state ESTABLISHED -j ACCEPT
+# iptables -A OUTPUT -p tcp --sport 1024: --dport 1024: -m state --state ESTABLISHED -j ACCEPT
+# iptables -A INPUT -p tcp --sport 1024: --dport 1024: -m state --state ESTABLISHED,RELATED,NEW -j ACCEPT
+
+
